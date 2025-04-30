@@ -7,15 +7,19 @@ Place `SteamProxy.exe` into steam install dir i.e `C:\Program Files (x86)\Steam`
  * Set the `Launch Options` to `SteamProxy.exe --steam=%command% --app=<path>` adding any other args as required
    * Where <path> is the path to the new exe to launch
 
-#### Example using Oblivion:
-`SteamProxy.exe --steam=%command% --app=oblivion.exe`
+#### Example using OBSE for Oblivion:
+`SteamProxy.exe --steam=%command% --app=obse_loader.exe`
+
+#### Another Example using OBSE64 for Oblivion Remaster:
+`SteamProxy.exe --steam=%command% --app=obse64_loader.exe --ue5`
 
 ### SteamProxy Args
 
-| Arg               | Description       |
-| :---------------- | :---------------- |
-| --steam=%command% | Required as is: allows steam to launch the proxy correctly |
-| --app=<path> | Required: the path (absolute or relative) to the exe to run |
-| --debug | Optional: Output some basic debug text into `SteamProxy.log` in the game dir |
+| Arg               | Description       | Notes             |
+| :---------------- | :---------------- | :---------------- |
+| --steam=%command% | Allows steam to launch the proxy correctly | Required, Should be the first arg |
+| --app=<path> | The path (absolute or relative) to the exe to run | Required |
+| --ue5 | If using a relative path for `--app` changes the base path to the games `Binaries\Win64\` directory | Optional |
+| --debug | Output some basic debug text into `SteamProxy.log` in the game dir | Optional |
 
 *You may also add any args to be passed along to the new exe at the end
