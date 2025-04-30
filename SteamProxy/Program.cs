@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.IO;
+using Windows.Gaming.UI;
 
 namespace SteamProxy
 {
@@ -30,6 +32,7 @@ namespace SteamProxy
                 Trace.WriteLine(arg);
 
                 if (arg == "--debug") continue;
+                if (arg == "--ue5") continue;
 
                 if (arg.StartsWith("--steam="))
                 {
@@ -39,6 +42,16 @@ namespace SteamProxy
 
                 if (arg.StartsWith("--app="))
                 {
+                    Trace.WriteLine("APP");
+                    if (args.Contains("--ue5"))
+                    {
+                        string gamedir = steamCommand.Substring(0, steamCommand.Length - 4);
+                        string bindir = Path.Combine(gamedir, "Binaries", "Win64");
+
+                        launchExe = Path.GetFullPath(Path.Combine(bindir, arg.Substring(6)));
+                        continue;
+                    }
+
                     launchExe = Path.GetFullPath(arg.Substring(6));
                     continue;
                 }
