@@ -22,6 +22,7 @@ namespace SteamProxy
 
             string launchExe = "";
             string launchArgs = "";
+            string launchDir = Environment.CurrentDirectory;
             string steamCommand = "";
 
             Trace.WriteLine("SteamProxy Args");
@@ -37,6 +38,20 @@ namespace SteamProxy
                 if (arg.StartsWith("--steam="))
                 {
                     steamCommand = Path.GetFullPath(arg.Substring(8));
+                    continue;
+                }
+
+                if (arg.StartsWith("--mo2="))
+                {
+                    Trace.WriteLine("MO2 Profile");
+                    
+                    string[] modOrgainizer = arg.Substring(6).Split("|");
+                    string modOrgainizerBin = modOrgainizer[0];
+                    string modOrgainizerProfile = @"moshortcut://" + modOrgainizer[1];
+
+                    launchDir = Path.GetDirectoryName(modOrgainizerBin);
+                    launchExe = Path.GetFullPath(modOrgainizerBin);
+                    launchArgs = "\"" + modOrgainizerProfile + "\"";
                     continue;
                 }
 
@@ -72,13 +87,14 @@ namespace SteamProxy
             Trace.Indent();
             Trace.WriteLine("Executable: " + launchExe);
             Trace.WriteLine("Arguments: " + (launchArgs == "" ? "<none>" : launchArgs));
-            Trace.WriteLine("Working Dir: " + Environment.CurrentDirectory);
+            Trace.WriteLine("Working Dir: " + launchDir);
             Trace.Unindent();
 
             ProcessStartInfo GameStartInfo = new()
             {
                 FileName = launchExe,
                 Arguments = launchArgs,
+                WorkingDirectory = launchDir,
                 UseShellExecute = false
             };
 
