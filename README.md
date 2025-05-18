@@ -21,15 +21,15 @@ Place `SteamProxy.exe` into steam install dir i.e `C:\Program Files (x86)\Steam`
 | :------------------ | :--------------------------------------------------------------------------------- | :--------------- |
 | `--steam=%command%` | Allows steam to launch the proxy correctly                                         | Required - First |
 | `--app=<path>`      | The path (absolute or relative) to the exe to run                                  | Required*        |
-| `--mo2=<path>\|<profile:app>`| The path to mod orgainizer 2s exe followed by the profile and app to load | Required*        |
+| `--mo2=<path>|<profile:app>`| The path to mod orgainizer 2s exe followed by the profile and app to load | Required*        |
 | `--ue5`             | Changes the base path to the games `Binaries\Win64\` directory                     | Optional^        |
 | `--debug`           | Output some basic debug text into `SteamProxy.log` in the game dir                 | Optional         |
 
 > [!CAUTION]  
-> *You must only use either `--app=<path>` OR `--mo2=<path>\|<profile:app>` not both!
+> *You must only use either `--app=<path>` OR `--mo2=<path>|<profile:app>` not both!
 
 > [!WARNING]  
-> ^You shouldn't use `--ue5` with `--mo2=<path>\|<profile:app>`
+> ^You shouldn't use `--ue5` with `--mo2=<path>|<profile:app>`
 
 > [!NOTE]
 > You may also add any args to be passed along to the new exe at the end
